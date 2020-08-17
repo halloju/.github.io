@@ -220,7 +220,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-17 11:33:48 / Modified: 12:19:16" itemprop="dateCreated datePublished" datetime="2020-08-17T11:33:48+08:00">2020-08-17</time>
+              <time title="Created: 2020-08-17 11:33:48 / Modified: 17:19:27" itemprop="dateCreated datePublished" datetime="2020-08-17T11:33:48+08:00">2020-08-17</time>
             </span>
 
           
@@ -243,7 +243,7 @@
 <li>佈署模型到 API Server</li>
 </ol>
 <hr>
-<h2 id="比賽主題"><a href="#比賽主題" class="headerlink" title="比賽主題"></a>比賽主題</h2><p>目標 : 判斷該新聞內文是否含有洗錢防制 (AML) 相關焦點人物，並擷取出焦點人物名單（名單有可能為複數或為空）</p>
+<h2 id="比賽主題"><a href="#比賽主題" class="headerlink" title="比賽主題"></a>比賽主題</h2><p>:::warning<br>目標 : 判斷該新聞內文是否含有洗錢防制 (AML) 相關焦點人物，並擷取出焦點人物名單（名單有可能為複數或為空）<br>:::</p>
 <blockquote>
 <p>「模型訓練」進行方式如下：<br>參賽隊伍於 T-Brain 平台 Dataset Download 區下載訓練資料集，主辦單位提供新聞連結與該新聞對應的焦點人物名單，參賽隊伍需自行實作爬蟲程式獲取新聞內文。…<br>參賽隊伍須提供 RESTful API Server 並將模型部署於此 API Server，並以 API 服務形式供「線上對決 – 模型準度爭霸戰」使用…</p>
 </blockquote>
@@ -262,22 +262,16 @@
 <li><em>模型預測 [“邱譬丘”,”皮卡丘”] 可得 $2/(2+2)=0.5$；如果模型預測 [“邱譬丘”] 可得 $2/(1+2)=0.66$</em></li>
 <li><em>但如果預測  [“皮卡丘”] 就是0分計算</em></li>
 </ul>
-<p>可以得出的初步結論，也是我決定採行的先行策略是：</p>
-<p>若能準確預測新聞內文與洗錢防治無關的話，就可以很有效率的拿到分數（truth 為空值）。若遇上新聞內文與洗錢防治有關的情形，就寧願多抓出一些人。</p>
 <hr>
 <h2 id="Before-starting"><a href="#Before-starting" class="headerlink" title="Before starting"></a>Before starting</h2><p>我本身是統計背景，只初步具備有限的深度學習知識，之前也完全沒有接觸過自然語言處理。</p>
 <p>我花了一個週末 google 跟觀看<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ugWDIIOHtPA">李弘毅教授</a>/<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_i3aqgKVNQI&list=PLkDaE6sCZn6F6wUI9tvS_Gw1vaFAx6rd6">Andrew Ng 教授</a>介紹 NLP 相關概念的影片，大概了解自然語言處理發展的脈絡、概念，目前發展到哪裡。雖然基礎非常薄弱，但對我而言學習最好的方式就是動手做，所以就接著開始試著搭建最基礎的模型。</p>
-<h2 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h2><p>最簡單的策略：</p>
-<p>判斷是否為AML相關的新聞 (Classification) → 擷取關鍵句子 (Summarize)→ 擷取人名 (Name entity recognition)</p>
-<p>這個策略的重點在於擷取關鍵句子，如果文章中出現太多誤導性的句子就會多出很多無關的人，例如記者、檢察官、法官，「<em>創辦人<strong>陳廷智</strong>之子、總經理陳星佑被高等法院加重改判刑2年半</em>」，或是誰誰誰的兒女及兄弟姊妹等。</p>
-<p>另一個我想到比較好的作法是：</p>
-<p>判斷是否為AML相關的新聞 (Classification) → 擷取人名 (Name entity recognition)→ 指代消解(Coreference resolution) →句子分類，也就是那個人有罪無罪 (Classification)</p>
-<p>但這時候會出現一些我無法判斷規則的狀況，這裡舉一些例子，</p>
+<h2 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h2><p>最簡單的策略：<br>:::warning<br>判斷是否為AML相關的新聞 (Classification) → 擷取關鍵句子 (Summarize)→ 擷取人名 (Name entity recognition)<br>:::<br>這個策略的重點在於擷取關鍵句子，如果文章中出現太多誤導性的句子就會多出很多無關的人，例如記者、檢察官、法官，「<em>創辦人<strong>陳廷智</strong>之子、總經理陳星佑被高等法院加重改判刑2年半</em>」，或是誰誰誰的兒女及兄弟姊妹等。</p>
+<p>另一個我想到比較好的作法是：<br>:::warning<br>判斷是否為AML相關的新聞 (Classification) → 擷取人名 (Name entity recognition)→ 指代消解(Coreference resolution) →句子分類，也就是那個人有罪無罪 (Classification)<br>:::<br>但這時候會出現一些我無法判斷規則的狀況，這裡舉一些例子，</p>
 <ol>
 <li>「*…另被檢方指控涉逃漏稅與偽證的農地買主<strong>林德復</strong>，也因罪嫌不足獲判無罪*」，這篇<strong>林德復</strong>不在名單內，但</li>
 <li>「.<em>..並將<strong>李庸三</strong>與洪姓父子等人提起公訴。一審依貪污罪…三審李無罪確定…<em>」，這篇新聞</em></em>李庸三<strong>卻在名單內</strong>。**</li>
 </ol>
-<p>有鑑於時間有限、目前的能力亦還在起步，所以我選擇最簡單的策略，也就是上面第一種。<br><img src="/2020/08/ESUN-NLP/Flowchart.png" alt="/2020/08/ESUN-NLP/Flowchart.png"><br>預測流程</p>
+<p>有鑑於時間有限、目前的能力亦還在起步，所以我選擇最簡單的策略，也就是上面第一種。<br><img src="/2020/08/ESUN-NLP/Flowchart.png" alt="/2020/08/ESUN-NLP/Flowchart.png"></p>
 <h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/16o9nQpI7AzO4SuPTftaUM_KwajokJmin?usp=sharing">Colab</a><br>transformers==3.0.1<br>kashgari==2.0.0a1</p>
 <h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>玉山提供五千多筆的 URL 與相應的人名，要寫一個爬蟲把新聞內文抓下來，再另外根據有無列出焦點人物添加 IND 的標籤，如果該 URL 新聞內文已下架就直接從資料中刪除，結果如下：</p>
 <p><img src="/2020/08/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg" alt="/2020/08/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg"></p>
