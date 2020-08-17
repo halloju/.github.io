@@ -29,14 +29,14 @@
 <meta property="og:site_name" content="Juver">
 <meta property="og:description" content="比賽那麼多，玉山的有什麼特別？現在外面的機器學習相關活動和比賽像雨後春筍一樣冒出，玉山每年也都會舉辦資料科學或機器學習相關比賽，今年（2020）的比賽和往常不同的特點在：  題目是 NLP 應用相關 比賽方式並非直接上傳 submission，而是呼叫 API 進行預測，更貼近實際應用場景 (因為 API 的形式更為靈活，可以即時可以批量，也可以很輕鬆地更換模型版本或者是給不同的人使用)  對於比">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg">
-<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-13_09-55-00.jpg">
-<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/ESUN-NLP/rank.jpg">
+<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg">
+<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg">
+<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/rank.jpg">
 <meta property="article:published_time" content="2020-08-17T03:33:48.000Z">
-<meta property="article:modified_time" content="2020-08-17T03:42:19.183Z">
+<meta property="article:modified_time" content="2020-08-17T03:49:35.974Z">
 <meta property="article:author" content="Juju">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg">
+<meta name="twitter:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg">
 
 <link rel="canonical" href="https://halloju.github.io/2020/08/17/ESUN-NLP/">
 
@@ -229,7 +229,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-17 11:33:48 / Modified: 11:42:19" itemprop="dateCreated datePublished" datetime="2020-08-17T11:33:48+08:00">2020-08-17</time>
+              <time title="Created: 2020-08-17 11:33:48 / Modified: 11:49:35" itemprop="dateCreated datePublished" datetime="2020-08-17T11:33:48+08:00">2020-08-17</time>
             </span>
 
           
@@ -259,7 +259,7 @@
 <blockquote>
 <p>「線上對決 – 模型準度爭霸戰」進行方式如下：<br>爭霸戰為期九天，包含一天測試賽（2020/07/22），與八天正式賽…<br>主辦單位將會使用 HTTP Request 方式驗證參賽者模型成效，每日多輪提問，每輪一題，…<br>將以模型擷取之名單準確度作為積分（詳見下方評分方式），並於每日 24:00 前於活動 Slack（channel # 公告區）公布當日累積積分排名，每日加總後積分為最終排名依據。</p>
 </blockquote>
-<h2 id="評分標準"><a href="#評分標準" class="headerlink" title="評分標準"></a>評分標準</h2><p><img src="ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg" alt="ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg"></p>
+<h2 id="評分標準"><a href="#評分標準" class="headerlink" title="評分標準"></a>評分標準</h2><p><img src="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg" alt="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg"></p>
 <p>簡單來說：</p>
 <ol>
 <li>全對會獲得一分</li>
@@ -289,7 +289,7 @@
 <p>有鑑於時間有限、目前的能力亦還在起步，所以我選擇最簡單的策略，也就是上面第一種。</p>
 <h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/16o9nQpI7AzO4SuPTftaUM_KwajokJmin?usp=sharing">Colab</a><br>transformers==3.0.1<br>kashgari==2.0.0a1</p>
 <h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>玉山提供五千多筆的 URL 與相應的人名，要寫一個爬蟲把新聞內文抓下來，再另外根據有無列出焦點人物添加 IND 的標籤，如果該 URL 新聞內文已下架就直接從資料中刪除，結果如下：</p>
-<p><img src="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-13_09-55-00.jpg" alt="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-13_09-55-00.jpg"></p>
+<p><img src="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg" alt="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg"></p>
 <h3 id="1-判斷是否為-AML-相關的新聞"><a href="#1-判斷是否為-AML-相關的新聞" class="headerlink" title="1. 判斷是否為 AML 相關的新聞"></a>1. 判斷是否為 AML 相關的新聞</h3><p>第一步先判斷該新聞是否跟不法收入有關，output 的標籤為 IND，如果無關則直接回傳空 list，有關則繼續進行下一步。我使用 <strong>transformers</strong>，直接借助 <strong>BERT</strong> 的威力，再加一層 layer 進行 fine-tune。效果非常好，val_acc 在 3 個 Epoch 後達到 0.96,  f1-score 也有 0.86，只能說 BERT 真的強大。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_model</span>(<span class="params">transformer, max_len=<span class="number">128</span></span>):</span></span><br><span class="line">    input_word_ids = Input(shape=(max_len,), dtype=tf.int32, name=<span class="string">&quot;input_word_ids&quot;</span>)</span><br><span class="line">    sequence_output = transformer(input_word_ids)[<span class="number">0</span>]</span><br><span class="line">    cls_token = sequence_output[:, <span class="number">0</span>, :]</span><br><span class="line">    out = Dense(<span class="number">1</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>)(cls_token)</span><br><span class="line">    </span><br><span class="line">    model = Model(inputs=input_word_ids, outputs=out)</span><br><span class="line">    model.compile(Adam(lr=<span class="number">1e-5</span>), loss=<span class="string">&quot;binary_crossentropy&quot;</span>, metrics=[<span class="string">&#x27;accuracy&#x27;</span>,f1_m,precision_m, recall_m])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line">strategy = tf.distribute.get_strategy()</span><br><span class="line"><span class="keyword">with</span> strategy.scope():</span><br><span class="line">    transformer_layer = (</span><br><span class="line">        transformers.TFBertModel</span><br><span class="line">        .from_pretrained(<span class="string">&#x27;bert-base-chinese&#x27;</span> ,from_pt = <span class="literal">True</span>)</span><br><span class="line">    )</span><br><span class="line">    cls = build_model(transformer_layer, max_len=MAX_LEN)</span><br></pre></td></tr></table></figure>
 
@@ -314,7 +314,7 @@
 <p>這樣可以盡量避免納入不相關人名，當然這樣只能刪掉一些明顯不要的句子，但加入句子分類模型後每日分數從 365,366 進步至371，但已經是比賽最後一天了。</p>
 <h2 id="After-Competition"><a href="#After-Competition" class="headerlink" title="After Competition"></a>After Competition</h2><p>一開始抱著學習的心態，加上只有一個人，所以第一天發現自己有30名時超開心，重新把第一步的分類模型重新訓練，加長tokenize的長度，準確率果然進步至0.99，分數也從350進步至365。在這場比賽我基本上就是靠 BERT 而已，自己貢獻的範圍其實很有限，但也見識到了目前自然語言處理的強大，這應該是往後學習 NLP 相關知識的一個起點。</p>
 <hr>
-<p><img src="ESUN-NLP/rank.jpg" alt="ESUN-NLP/rank.jpg"></p>
+<p><img src="/2020/08/17/ESUN-NLP/rank.jpg" alt="/2020/08/17/ESUN-NLP/rank.jpg"></p>
 <p>取得第13名的成績(13/409)</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/halloju/ESUM-NLP-Competition">halloju/ESUM-NLP-Competition</a></p>
 
