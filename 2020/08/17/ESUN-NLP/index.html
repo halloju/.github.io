@@ -22,28 +22,36 @@
     var CONFIG = {"hostname":"halloju.github.io","root":"/","scheme":"Muse","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Juver">
-<meta property="og:url" content="https://halloju.github.io/index.html">
+  <meta name="description" content="玉山人工智慧公開挑戰賽比賽那麼多，玉山的有什麼特別？現在外面的機器學習相關活動和比賽像雨後春筍一樣冒出，玉山每年也都會舉辦資料科學或機器學習相關比賽，今年（2020）的比賽和往常不同的特點在：  題目是 NLP 應用相關 比賽方式並非直接上傳 submission，而是呼叫 API 進行預測，更貼近實際應用場景 (因為 API 的形式更為靈活，可以即時可以批量，也可以很輕鬆地更換模型版本或者是給不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESUN-NLP">
+<meta property="og:url" content="https://halloju.github.io/2020/08/17/ESUN-NLP/index.html">
 <meta property="og:site_name" content="Juver">
+<meta property="og:description" content="玉山人工智慧公開挑戰賽比賽那麼多，玉山的有什麼特別？現在外面的機器學習相關活動和比賽像雨後春筍一樣冒出，玉山每年也都會舉辦資料科學或機器學習相關比賽，今年（2020）的比賽和往常不同的特點在：  題目是 NLP 應用相關 比賽方式並非直接上傳 submission，而是呼叫 API 進行預測，更貼近實際應用場景 (因為 API 的形式更為靈活，可以即時可以批量，也可以很輕鬆地更換模型版本或者是給不">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-07_14-37-25.jpg">
+<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-13_09-55-00.jpg">
+<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/rank.jpg">
+<meta property="article:published_time" content="2020-08-17T03:33:48.000Z">
+<meta property="article:modified_time" content="2020-08-17T03:34:29.594Z">
 <meta property="article:author" content="Juju">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-07_14-37-25.jpg">
 
-<link rel="canonical" href="https://halloju.github.io/">
+<link rel="canonical" href="https://halloju.github.io/2020/08/17/ESUN-NLP/">
 
 
 <script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Juver</title>
+  <title>ESUN-NLP | Juver</title>
   
 
 
@@ -132,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -144,6 +152,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD"><span class="nav-number">1.</span> <span class="nav-text">玉山人工智慧公開挑戰賽</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%B3%BD%E9%82%A3%E9%BA%BC%E5%A4%9A%EF%BC%8C%E7%8E%89%E5%B1%B1%E7%9A%84%E6%9C%89%E4%BB%80%E9%BA%BC%E7%89%B9%E5%88%A5%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">比賽那麼多，玉山的有什麼特別？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8D%E6%96%BC%E6%AF%94%E8%B3%BD%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">1.2.</span> <span class="nav-text">對於比賽的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%B3%BD%E4%B8%BB%E9%A1%8C"><span class="nav-number">1.3.</span> <span class="nav-text">比賽主題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A9%95%E5%88%86%E6%A8%99%E6%BA%96"><span class="nav-number">1.4.</span> <span class="nav-text">評分標準</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Before-starting"><span class="nav-number">1.5.</span> <span class="nav-text">Before starting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature"><span class="nav-number">1.6.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training"><span class="nav-number">1.7.</span> <span class="nav-text">Training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Environment"><span class="nav-number">1.7.1.</span> <span class="nav-text">Environment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data"><span class="nav-number">1.7.2.</span> <span class="nav-text">Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%A4%E6%96%B7%E6%98%AF%E5%90%A6%E7%82%BA-AML-%E7%9B%B8%E9%97%9C%E7%9A%84%E6%96%B0%E8%81%9E"><span class="nav-number">1.7.3.</span> <span class="nav-text">1. 判斷是否為 AML 相關的新聞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%93%B7%E5%8F%96%E4%BA%BA%E5%90%8D"><span class="nav-number">1.7.4.</span> <span class="nav-text">2. 擷取人名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%93%B7%E5%8F%96%E9%97%9C%E9%8D%B5%E5%8F%A5%E5%AD%90"><span class="nav-number">1.7.5.</span> <span class="nav-text">3. 擷取關鍵句子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#After-Competition"><span class="nav-number">1.8.</span> <span class="nav-text">After Competition</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -187,9 +196,10 @@
       <div class="main-inner">
         
 
-        <div class="content index posts-expand">
+        <div class="content post posts-expand">
           
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -207,10 +217,9 @@
 
     
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/17/ESUN-NLP/" class="post-title-link" itemprop="url">ESUN-NLP</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          ESUN-NLP
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -232,7 +241,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="玉山人工智慧公開挑戰賽"><a href="#玉山人工智慧公開挑戰賽" class="headerlink" title="玉山人工智慧公開挑戰賽"></a>玉山人工智慧公開挑戰賽</h1><h2 id="比賽那麼多，玉山的有什麼特別？"><a href="#比賽那麼多，玉山的有什麼特別？" class="headerlink" title="比賽那麼多，玉山的有什麼特別？"></a>比賽那麼多，玉山的有什麼特別？</h2><p>現在外面的機器學習相關活動和比賽像雨後春筍一樣冒出，玉山每年也都會舉辦資料科學或機器學習相關比賽，今年（2020）的比賽和往常不同的特點在：</p>
+        <h1 id="玉山人工智慧公開挑戰賽"><a href="#玉山人工智慧公開挑戰賽" class="headerlink" title="玉山人工智慧公開挑戰賽"></a>玉山人工智慧公開挑戰賽</h1><h2 id="比賽那麼多，玉山的有什麼特別？"><a href="#比賽那麼多，玉山的有什麼特別？" class="headerlink" title="比賽那麼多，玉山的有什麼特別？"></a>比賽那麼多，玉山的有什麼特別？</h2><p>現在外面的機器學習相關活動和比賽像雨後春筍一樣冒出，玉山每年也都會舉辦資料科學或機器學習相關比賽，今年（2020）的比賽和往常不同的特點在：</p>
 <ol>
 <li>題目是 NLP 應用相關</li>
 <li>比賽方式並非直接上傳 submission，而是呼叫 API 進行預測，更貼近實際應用場景 (因為 API 的形式更為靈活，可以即時可以批量，也可以很輕鬆地更換模型版本或者是給不同的人使用)</li>
@@ -309,91 +318,30 @@
 <p>取得第13名的成績(13/409)</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/halloju/ESUM-NLP-Competition">halloju/ESUM-NLP-Competition</a></p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://halloju.github.io/2020/08/17/hello-world/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Juju">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Juver">
-    </span>
-
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/17/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-17 09:47:01" itemprop="dateCreated datePublished" datetime="2020-08-17T09:47:01+08:00">2020-08-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/17/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
