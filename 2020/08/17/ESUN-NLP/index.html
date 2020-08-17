@@ -31,10 +31,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg">
 <meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg">
-<meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg">
 <meta property="og:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/rank.jpg">
 <meta property="article:published_time" content="2020-08-17T03:33:48.000Z">
-<meta property="article:modified_time" content="2020-08-17T04:15:32.098Z">
+<meta property="article:modified_time" content="2020-08-17T04:17:43.007Z">
 <meta property="article:author" content="Juju">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://halloju.github.io/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg">
@@ -230,7 +229,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-17 11:33:48 / Modified: 12:15:32" itemprop="dateCreated datePublished" datetime="2020-08-17T11:33:48+08:00">2020-08-17</time>
+              <time title="Created: 2020-08-17 11:33:48 / Modified: 12:17:43" itemprop="dateCreated datePublished" datetime="2020-08-17T11:33:48+08:00">2020-08-17</time>
             </span>
 
           
@@ -287,7 +286,7 @@
 <li>「*…另被檢方指控涉逃漏稅與偽證的農地買主<strong>林德復</strong>，也因罪嫌不足獲判無罪*」，這篇<strong>林德復</strong>不在名單內，但</li>
 <li>「.<em>..並將<strong>李庸三</strong>與洪姓父子等人提起公訴。一審依貪污罪…三審李無罪確定…<em>」，這篇新聞</em></em>李庸三<strong>卻在名單內</strong>。**</li>
 </ol>
-<p>有鑑於時間有限、目前的能力亦還在起步，所以我選擇最簡單的策略，也就是上面第一種。<br><img src="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg" alt="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg"><br>預測流程</p>
+<p>有鑑於時間有限、目前的能力亦還在起步，所以我選擇最簡單的策略，也就是上面第一種。<br>![/2020/08/17/ESUN-NLP/CDRA Flowchart.png](/2020/08/17/ESUN-NLP/CDRA Flowchart.png)<br>預測流程</p>
 <h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/16o9nQpI7AzO4SuPTftaUM_KwajokJmin?usp=sharing">Colab</a><br>transformers==3.0.1<br>kashgari==2.0.0a1</p>
 <h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>玉山提供五千多筆的 URL 與相應的人名，要寫一個爬蟲把新聞內文抓下來，再另外根據有無列出焦點人物添加 IND 的標籤，如果該 URL 新聞內文已下架就直接從資料中刪除，結果如下：</p>
 <p><img src="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg" alt="/2020/08/17/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg"></p>
