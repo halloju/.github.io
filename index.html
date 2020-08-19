@@ -209,7 +209,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/ESUN-NLP/" class="post-title-link" itemprop="url">玉山人工智慧公開挑戰賽</a>
+            <a href="/2020/08/ESUN-NLP/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -220,7 +220,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-17 11:33:48 / Modified: 17:19:27" itemprop="dateCreated datePublished" datetime="2020-08-17T11:33:48+08:00">2020-08-17</time>
+              <time title="Created: 2020-08-19 12:13:53 / Modified: 04:12:36" itemprop="dateCreated datePublished" datetime="2020-08-19T12:13:53+08:00">2020-08-19</time>
             </span>
 
           
@@ -232,77 +232,681 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="比賽那麼多，玉山的有什麼特別？"><a href="#比賽那麼多，玉山的有什麼特別？" class="headerlink" title="比賽那麼多，玉山的有什麼特別？"></a>比賽那麼多，玉山的有什麼特別？</h2><p>現在外面的機器學習相關活動和比賽像雨後春筍一樣冒出，玉山每年也都會舉辦資料科學或機器學習相關比賽，今年（2020）的比賽和往常不同的特點在：</p>
-<ol>
-<li>題目是 NLP 應用相關</li>
-<li>比賽方式並非直接上傳 submission，而是呼叫 API 進行預測，更貼近實際應用場景 (因為 API 的形式更為靈活，可以即時可以批量，也可以很輕鬆地更換模型版本或者是給不同的人使用)</li>
-</ol>
-<h2 id="對於比賽的期望"><a href="#對於比賽的期望" class="headerlink" title="對於比賽的期望"></a>對於比賽的期望</h2><p>基於以上原因，我很快報名比賽，這次比賽過程，我主要希望能夠學習：</p>
-<ol>
-<li>NLP 的概念與實務應用</li>
-<li>佈署模型到 API Server</li>
-</ol>
-<hr>
-<h2 id="比賽主題"><a href="#比賽主題" class="headerlink" title="比賽主題"></a>比賽主題</h2><p>:::warning<br>目標 : 判斷該新聞內文是否含有洗錢防制 (AML) 相關焦點人物，並擷取出焦點人物名單（名單有可能為複數或為空）<br>:::</p>
-<blockquote>
-<p>「模型訓練」進行方式如下：<br>參賽隊伍於 T-Brain 平台 Dataset Download 區下載訓練資料集，主辦單位提供新聞連結與該新聞對應的焦點人物名單，參賽隊伍需自行實作爬蟲程式獲取新聞內文。…<br>參賽隊伍須提供 RESTful API Server 並將模型部署於此 API Server，並以 API 服務形式供「線上對決 – 模型準度爭霸戰」使用…</p>
-</blockquote>
-<blockquote>
-<p>「線上對決 – 模型準度爭霸戰」進行方式如下：<br>爭霸戰為期九天，包含一天測試賽（2020/07/22），與八天正式賽…<br>主辦單位將會使用 HTTP Request 方式驗證參賽者模型成效，每日多輪提問，每輪一題，…<br>將以模型擷取之名單準確度作為積分（詳見下方評分方式），並於每日 24:00 前於活動 Slack（channel # 公告區）公布當日累積積分排名，每日加總後積分為最終排名依據。</p>
-</blockquote>
-<h2 id="評分標準"><a href="#評分標準" class="headerlink" title="評分標準"></a>評分標準</h2><p><img src="/2020/08/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg" alt="/2020/08/ESUN-NLP/Screenshot_from_2020-08-07_14-37-25.jpg"></p>
-<p>簡單來說：</p>
-<ol>
-<li>全對會獲得一分</li>
-<li>如果 truth 為空值而模型正確預測即可得一分</li>
-</ol>
-<p>舉例而言，</p>
-<ul>
-<li><em>如果 truth 為 [“邱秋蚯”,”邱譬丘”]，全部正確預測可得一分</em></li>
-<li><em>模型預測 [“邱譬丘”,”皮卡丘”] 可得 $2/(2+2)=0.5$；如果模型預測 [“邱譬丘”] 可得 $2/(1+2)=0.66$</em></li>
-<li><em>但如果預測  [“皮卡丘”] 就是0分計算</em></li>
-</ul>
-<hr>
-<h2 id="Before-starting"><a href="#Before-starting" class="headerlink" title="Before starting"></a>Before starting</h2><p>我本身是統計背景，只初步具備有限的深度學習知識，之前也完全沒有接觸過自然語言處理。</p>
-<p>我花了一個週末 google 跟觀看<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ugWDIIOHtPA">李弘毅教授</a>/<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_i3aqgKVNQI&list=PLkDaE6sCZn6F6wUI9tvS_Gw1vaFAx6rd6">Andrew Ng 教授</a>介紹 NLP 相關概念的影片，大概了解自然語言處理發展的脈絡、概念，目前發展到哪裡。雖然基礎非常薄弱，但對我而言學習最好的方式就是動手做，所以就接著開始試著搭建最基礎的模型。</p>
-<h2 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h2><p>最簡單的策略：<br>:::warning<br>判斷是否為AML相關的新聞 (Classification) → 擷取關鍵句子 (Summarize)→ 擷取人名 (Name entity recognition)<br>:::<br>這個策略的重點在於擷取關鍵句子，如果文章中出現太多誤導性的句子就會多出很多無關的人，例如記者、檢察官、法官，「<em>創辦人<strong>陳廷智</strong>之子、總經理陳星佑被高等法院加重改判刑2年半</em>」，或是誰誰誰的兒女及兄弟姊妹等。</p>
-<p>另一個我想到比較好的作法是：<br>:::warning<br>判斷是否為AML相關的新聞 (Classification) → 擷取人名 (Name entity recognition)→ 指代消解(Coreference resolution) →句子分類，也就是那個人有罪無罪 (Classification)<br>:::<br>但這時候會出現一些我無法判斷規則的狀況，這裡舉一些例子，</p>
-<ol>
-<li>「*…另被檢方指控涉逃漏稅與偽證的農地買主<strong>林德復</strong>，也因罪嫌不足獲判無罪*」，這篇<strong>林德復</strong>不在名單內，但</li>
-<li>「.<em>..並將<strong>李庸三</strong>與洪姓父子等人提起公訴。一審依貪污罪…三審李無罪確定…<em>」，這篇新聞</em></em>李庸三<strong>卻在名單內</strong>。**</li>
-</ol>
-<p>有鑑於時間有限、目前的能力亦還在起步，所以我選擇最簡單的策略，也就是上面第一種。<br><img src="/2020/08/ESUN-NLP/Flowchart.png" alt="/2020/08/ESUN-NLP/Flowchart.png"></p>
-<h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><p><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/16o9nQpI7AzO4SuPTftaUM_KwajokJmin?usp=sharing">Colab</a><br>transformers==3.0.1<br>kashgari==2.0.0a1</p>
-<h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>玉山提供五千多筆的 URL 與相應的人名，要寫一個爬蟲把新聞內文抓下來，再另外根據有無列出焦點人物添加 IND 的標籤，如果該 URL 新聞內文已下架就直接從資料中刪除，結果如下：</p>
-<p><img src="/2020/08/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg" alt="/2020/08/ESUN-NLP/Screenshot_from_2020-08-13_09-55-00.jpg"></p>
-<h3 id="1-判斷是否為-AML-相關的新聞"><a href="#1-判斷是否為-AML-相關的新聞" class="headerlink" title="1. 判斷是否為 AML 相關的新聞"></a>1. 判斷是否為 AML 相關的新聞</h3><p>第一步先判斷該新聞是否跟不法收入有關，output 的標籤為 IND，如果無關則直接回傳空 list，有關則繼續進行下一步。我使用 <strong>transformers</strong>，直接借助 <strong>BERT</strong> 的威力，再加一層 layer 進行 fine-tune。效果非常好，val_acc 在 3 個 Epoch 後達到 0.96,  f1-score 也有 0.86，只能說 BERT 真的強大。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_model</span>(<span class="params">transformer, max_len=<span class="number">128</span></span>):</span></span><br><span class="line">    input_word_ids = Input(shape=(max_len,), dtype=tf.int32, name=<span class="string">&quot;input_word_ids&quot;</span>)</span><br><span class="line">    sequence_output = transformer(input_word_ids)[<span class="number">0</span>]</span><br><span class="line">    cls_token = sequence_output[:, <span class="number">0</span>, :]</span><br><span class="line">    out = Dense(<span class="number">1</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>)(cls_token)</span><br><span class="line">    </span><br><span class="line">    model = Model(inputs=input_word_ids, outputs=out)</span><br><span class="line">    model.compile(Adam(lr=<span class="number">1e-5</span>), loss=<span class="string">&quot;binary_crossentropy&quot;</span>, metrics=[<span class="string">&#x27;accuracy&#x27;</span>,f1_m,precision_m, recall_m])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line">strategy = tf.distribute.get_strategy()</span><br><span class="line"><span class="keyword">with</span> strategy.scope():</span><br><span class="line">    transformer_layer = (</span><br><span class="line">        transformers.TFBertModel</span><br><span class="line">        .from_pretrained(<span class="string">&#x27;bert-base-chinese&#x27;</span> ,from_pt = <span class="literal">True</span>)</span><br><span class="line">    )</span><br><span class="line">    cls = build_model(transformer_layer, max_len=MAX_LEN)</span><br></pre></td></tr></table></figure>
+          <html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>玉山人工智慧公開挑戰賽</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
 
-<h3 id="2-擷取人名"><a href="#2-擷取人名" class="headerlink" title="2. 擷取人名"></a>2. 擷取人名</h3><p>這部份我嘗試了很多方法，想用同樣的模式以 transformers 在 BERT 上面再架一層 GRU，但中間各種 bug 解不了，剛好發現 **<a target="_blank" rel="noopener" href="https://github.com/BrikerMan/Kashgari/">kashgari</a>**，它包含了一些 NLP 模型的框架，其中有實體辨識 (NER) 相關模型，發現訓練的效果還不錯（人名辨識的部份 f1-score 有 0.96），我就決定先拿來用。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> kashgari.tasks.labeling <span class="keyword">import</span> BiGRU_Model</span><br><span class="line">model = BiGRU_Model(embed, sequence_length=SEQUENCE_LENGTH)</span><br><span class="line">          </span><br><span class="line">early_stop = keras.callbacks.EarlyStopping(patience=EARL_STOPPING_PATIENCE)</span><br><span class="line">reduse_lr_callback = keras.callbacks.ReduceLROnPlateau(factor=<span class="number">0.1</span>, </span><br><span class="line">                                                        patience=<span class="number">2</span>)</span><br><span class="line">eval_callback = EvalCallBack(kash_model=model,</span><br><span class="line">                              x_data=valid_x, </span><br><span class="line">                              y_data=valid_y,</span><br><span class="line">                              truncating=<span class="literal">True</span>,</span><br><span class="line">                              step=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">tf_board = keras.callbacks.TensorBoard(</span><br><span class="line">    log_dir=os.path.join(TF_LOG_FOLDER, run_name), </span><br><span class="line">    update_freq=<span class="number">1000</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">callbacks = [early_stop, reduse_lr_callback, eval_callback, tf_board]</span><br><span class="line"></span><br><span class="line">model.build_model(train_x, train_y)</span><br><span class="line">model.compile_model(optimizer=Adam(lr=<span class="number">1e-5</span>))</span><br><span class="line">model.fit(train_x, train_y, valid_x, valid_y,</span><br><span class="line">          callbacks=callbacks,</span><br><span class="line">          epochs=EPOCHS)</span><br></pre></td></tr></table></figure>
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
 
-<h3 id="3-擷取關鍵句子"><a href="#3-擷取關鍵句子" class="headerlink" title="3. 擷取關鍵句子"></a>3. 擷取關鍵句子</h3><p>一開始我直接使用 <strong>snownlp</strong> 進行 summarize 篩選出大約20句摘要句子，但到比賽後期發現這樣行不通，一篇文章通常有多個非關鍵人物的名字，例如上面提到過會混雜記者、該案件法官、檢察官等，需要另一個模型判斷哪些句子該納入。於是我就用暴力解法直接幫每個句子標註標籤，做出一個分類模型。其中，同時有人名與犯罪事實的就標註 1 ，例如：</p>
-<blockquote>
-<p><em>「高盟傑與同夥8月1日被台中地檢署查獲涉嫌販賣海洛因及安毒」</em></p>
-</blockquote>
-<p>然而，如果無關則標註為 0 ，例如：</p>
-<blockquote>
-<p><em>「記者陳俊宏／綜合報導台南市一名李姓女消防員被控有火警時」</em></p>
-</blockquote>
-<blockquote>
-<p><em>「前中華電信董事長、交大榮譽教授呂學錦，今年7月間接到冒充特偵組檢察官的詐騙集團來電」</em></p>
-</blockquote>
-<p>含有不相關人名的我也一律標註為 0，例如：</p>
-<blockquote>
-<p><em>「陳廷智長女即副總陳鏡如1年」</em></p>
-</blockquote>
-<p>這樣可以盡量避免納入不相關人名，當然這樣只能刪掉一些明顯不要的句子，但加入句子分類模型後每日分數從 365,366 進步至371，但已經是比賽最後一天了。</p>
-<h2 id="After-Competition"><a href="#After-Competition" class="headerlink" title="After Competition"></a>After Competition</h2><p>一開始抱著學習的心態，加上只有一個人，所以第一天發現自己有30名時超開心，重新把第一步的分類模型重新訓練，加長tokenize的長度，準確率果然進步至0.99，分數也從350進步至365。在這場比賽我基本上就是靠 BERT 而已，自己貢獻的範圍其實很有限，但也見識到了目前自然語言處理的強大，這應該是往後學習 NLP 相關知識的一個起點。</p>
-<hr>
-<p><img src="/2020/08/ESUN-NLP/rank.jpg" alt="/2020/08/ESUN-NLP/rank.jpg"></p>
-<p>取得第13名的成績(13/409)</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/halloju/ESUM-NLP-Competition">halloju/ESUM-NLP-Competition</a></p>
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
 
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5b9f9e6f-81cc-495c-b375-3a782f362224" class="page serif"><header><img class="page-cover-image" src="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/esum.jpg" style="object-position:center 20.199999999999996%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🗃️</span></div><h1 class="page-title">玉山人工智慧公開挑戰賽</h1></header><div class="page-body"><h2 id="caa9f0f3-a81a-4147-89e3-d26cd99eb6d0" class="">比賽那麼多，玉山的有什麼特別？</h2><p id="cb3e399f-fea7-48a7-806a-ebe388a14eb2" class="">現在外面的機器學習相關活動和比賽像雨後春筍一樣冒出，玉山每年也都會舉辦資料科學或機器學習相關比賽，今年（2020）的比賽和往常不同的特點在：</p><ol id="59645005-b9a0-4200-bfcd-c32b3de98d4c" class="numbered-list" start="1"><li>題目是 NLP 應用相關</li></ol><ol id="91838424-f730-4689-9736-9bef6c0573c2" class="numbered-list" start="2"><li>比賽方式並非直接上傳 submission，而是呼叫 API 進行預測，更貼近實際應用場景 (因為 API 的形式更為靈活，可以即時可以批量，也可以很輕鬆地更換模型版本或者是給不同的人使用)</li></ol><h2 id="707b0bab-2f0e-4a60-8075-b8b28d5a20a2" class="">對於比賽的期望</h2><p id="227854d4-a4c5-439c-8506-5a9f394555b3" class="">基於以上原因，我很快報名比賽，這次比賽過程，我主要希望能夠學習：</p><ol id="de81dbba-cb96-4adf-8af3-86b0a61b6b4c" class="numbered-list" start="1"><li> NLP 的概念與實務應用</li></ol><ol id="167af07b-1670-49e5-a9ce-74272d75546d" class="numbered-list" start="2"><li>佈署模型到 API Server</li></ol><hr id="2a0ce9a6-d882-4b32-98d5-4651bf634d6d"/><h2 id="06e522ac-751c-469b-b2cf-1c47c0ad0b92" class="">比賽主題</h2><figure class="callout" style="white-space:pre-wrap;display:flex" id="b40660fe-9548-4e42-8f83-46f882627c91"><div style="font-size:1.5em"><span class="icon">🥅</span></div><div style="width:100%">目標 : 判斷該新聞內文是否含有洗錢防制 (AML) 相關焦點人物，並擷取出焦點人物名單（名單有可能為複數或為空）</div></figure><blockquote id="bcba86fc-bdbb-4de8-9cfa-1f469c5841cf" class="">「模型訓練」進行方式如下：
+參賽隊伍於 T-Brain 平台 Dataset Download 區下載訓練資料集，主辦單位提供新聞連結與該新聞對應的焦點人物名單，參賽隊伍需自行實作爬蟲程式獲取新聞內文。...
+參賽隊伍須提供 RESTful API Server 並將模型部署於此 API Server，並以 API 服務形式供「線上對決 – 模型準度爭霸戰」使用...</blockquote><blockquote id="33231d57-2209-4b19-bd4c-3edf5e232d78" class="">「線上對決 – 模型準度爭霸戰」進行方式如下：
+爭霸戰為期九天，包含一天測試賽（2020/07/22），與八天正式賽...
+主辦單位將會使用 HTTP Request 方式驗證參賽者模型成效，每日多輪提問，每輪一題，...
+將以模型擷取之名單準確度作為積分（詳見下方評分方式），並於每日 24:00 前於活動 Slack（channel # 公告區）公布當日累積積分排名，每日加總後積分為最終排名依據。</blockquote><figure id="7a03e0f0-2c7b-4bba-8475-e865e88177f2" class="image"><a href="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-07_14-37-25.jpg"><img style="width:720px" src="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-07_14-37-25.jpg"/></a><figcaption>評分標準</figcaption></figure><p id="210a13f6-4ee1-48dc-abd8-2a1e908ba0e8" class="">簡單來說：</p><ol id="4588a3ff-4183-4401-83ba-eb7bf6369bab" class="numbered-list" start="1"><li>全對會獲得一分</li></ol><ol id="41d165d2-2511-49dc-b537-1dd3d4221bde" class="numbered-list" start="2"><li>如果 truth 為空值而模型正確預測即可得一分</li></ol><p id="5eb6d31e-cd3b-40c7-ace1-56a4d56aa6e4" class="">舉例而言，</p><ul id="f2bf2cb3-2841-4f4e-b926-7181a71b4449" class="bulleted-list"><li><em>如果 truth 為 [&quot;邱秋蚯&quot;,&quot;邱譬丘&quot;]，全部正確預測可得一分</em></li></ul><ul id="004e09b1-e4c1-4916-9f5b-fd8ef17be597" class="bulleted-list"><li><em>模型預測 [&quot;邱譬丘&quot;,&quot;皮卡丘&quot;] 可得 </em><em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>2</mn><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">2/(2+2)=0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord">/</span><span class="mopen">(</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span></span></span></span></span><span>﻿</span></span></em><em>；如果模型預測 [&quot;邱譬丘&quot;] 可得 </em><em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0.66</mn></mrow><annotation encoding="application/x-tex">2/(1+2)=0.66</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord">/</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">6</span><span class="mord">6</span></span></span></span></span><span>﻿</span></span></em></li></ul><ul id="4dddf667-eeca-4720-bf66-362df58d3b08" class="bulleted-list"><li><em>但如果預測  [&quot;皮卡丘&quot;] 就是0分計算</em></li></ul><hr id="503cdf5b-1e79-466f-b09a-be2105f6134e"/><h2 id="0eb9b56a-dab1-44d0-bde5-84cc73ace895" class="">Before starting</h2><p id="ffbe8625-6568-48bc-8d47-8af8bce00520" class="">我本身是統計背景，只初步具備有限的深度學習知識，之前也完全沒有接觸過自然語言處理。</p><p id="38c54234-06b7-4afe-a9bb-93f03ec03ecd" class="">我花了一個週末 google 跟觀看<mark class="highlight-blue"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ugWDIIOHtPA">李弘毅教授</a></mark>/<mark class="highlight-blue"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_i3aqgKVNQI&amp;list=PLkDaE6sCZn6F6wUI9tvS_Gw1vaFAx6rd6">Andrew Ng 教授</a></mark>介紹 NLP 相關概念的影片，<mark class="highlight-yellow_background">從word2vec,RNN 到最新的transformer model...</mark>大概了解自然語言處理發展的脈絡、概念，目前發展到哪裡，另外kaggle上也有很多<a target="_blank" rel="noopener" href="https://www.kaggle.com/tanulsingh077/deep-learning-for-nlp-zero-to-transformers-bert">筆記本</a>有做相關的介紹，是很好的學習資源。雖然基礎非常薄弱，但對我而言學習最好的方式就是動手做，所以就接著開始試著搭建最基礎的模型。</p><h2 id="cffa8c55-42d5-4ac1-b84e-bb4493bb5af6" class="">Feature</h2><p id="bd3bc86e-2703-4e5d-96cb-0ac7d375217d" class="">最簡單的策略：</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8334ea79-ac4b-473f-83fe-d619fe2cc753"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">判斷是否為AML相關的新聞 (Classification) → 擷取關鍵句子 (Summarize)→ 擷取人名 (Name entity recognition)</div></figure><p id="46e64b66-a91d-46cf-bd85-bccbce4741a6" class="">這個策略的重點在於擷取關鍵句子，如果文章中出現太多誤導性的句子就會多出很多無關的人，例如記者、檢察官、法官，「<em>創辦人</em><em><strong>陳廷智</strong></em><em>之子、總經理陳星佑被高等法院加重改判刑2年半</em>」，或是誰誰誰的兒女及兄弟姊妹等。</p><p id="bd3d9b5e-a74e-4f1f-9626-54e87bd17655" class="">另一個我想到比較好的作法是：</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="250c69a9-fa0a-4965-9411-c0d815cd7558"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">判斷是否為AML相關的新聞 (Classification) → 擷取人名 (Name entity recognition)→ 指代消解(Coreference resolution) →句子分類，也就是那個人有罪無罪 (Classification)</div></figure><p id="e1b9ebbd-2bf2-4346-9a3e-e4d94d8c7f43" class="">但這時候會出現一些我無法判斷規則的狀況，這裡舉一些例子，</p><ol id="e1e9635f-ca6f-4adb-b7e7-3d7f0c54c5a7" class="numbered-list" start="1"><li>「<em>...另被檢方指控涉逃漏稅與偽證的農地買主</em><em><strong>林德復</strong></em><em>，也因罪嫌不足獲判無罪</em>」，這篇<strong>林德復</strong>不在名單內，但</li></ol><ol id="77035a69-af04-425e-bf83-3ac3701c8321" class="numbered-list" start="2"><li>「.<em>..並將</em><em><strong>李庸三</strong></em><em>與洪姓父子等人提起公訴。一審依貪污罪...三審李無罪確定...</em>」，這篇新聞<strong>李庸三</strong>卻在名單內<strong>。</strong></li></ol><p id="b385e4ab-cbfa-4cc1-bbb7-092a53dcb776" class="">有鑑於時間有限、目前的能力亦還在起步，所以我選擇最簡單的策略，也就是上面第一種。</p><h3 id="b536e9df-8214-4a0f-9f13-79f6848849a0" class="">預測流程</h3><figure id="b320ab25-20ea-430c-b98e-87050c129eda" class="image"><a href="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/CDRA_Flowchart.png"><img style="width:980px" src="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/CDRA_Flowchart.png"/></a></figure><h2 id="3efdadcb-e346-4726-83d3-a6a1b17ea21c" class="">Training</h2><h3 id="67c1ad70-1886-49aa-ab7b-fb5da3fc28ad" class="">Environment</h3><p id="6f53fb3c-e305-489b-9b9b-8d86009cdeba" class=""><mark class="highlight-blue"><a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/16o9nQpI7AzO4SuPTftaUM_KwajokJmin?usp=sharing">Colab</a></mark><mark class="highlight-gray">
+transformers==3.0.0
+kashgari==2.0.0a1</mark></p><h3 id="06fa70f9-973e-4bce-9f86-11e5550d1148" class="">Data</h3><p id="65dc84b4-e84b-451e-ac53-63d04e0f2ae5" class="">玉山提供五千多筆的 URL 與相應的人名，要寫一個爬蟲把新聞內文抓下來，我再另外根據有無列出焦點人物添加 IND 的標籤，如果該 URL 新聞內文已下架就直接從資料中刪除，舉例來說：</p><figure id="4e626c40-25c0-411b-8ddc-d4906cf5f8b7" class="image"><a href="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-13_09-55-00.jpg"><img style="width:1098px" src="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/Screenshot_from_2020-08-13_09-55-00.jpg"/></a></figure><h3 id="4b09dbbd-65de-4936-8069-a824f6dbc543" class="">1. 判斷是否為 AML 相關的新聞</h3><p id="81849fa6-d8bd-4a87-b169-6505f0b15cf6" class="">第一步先判斷該新聞是否跟不法收入有關，output 的標籤為 IND，如果無關則直接回傳空 list，有關則繼續進行下一步。我使用 <strong>transformers</strong>，直接借助 <strong>BERT </strong>的威力，再加一層 layer 進行 fine-tune。效果非常好，val_acc 在 3 個 Epoch 後達到 0.96,  f1-score 也有 0.86，只能說 BERT 真的強大。</p><pre id="4f074b49-400c-4e8f-9d56-75ea51f77bb4" class="code"><code>def build_model(transformer, max_len=128):
+    input_word_ids = Input(shape=(max_len,), dtype=tf.int32, name=&quot;input_word_ids&quot;)
+    sequence_output = transformer(input_word_ids)[0]
+    cls_token = sequence_output[:, 0, :]
+    out = Dense(1, activation=&#x27;sigmoid&#x27;)(cls_token)
+    
+    model = Model(inputs=input_word_ids, outputs=out)
+    model.compile(Adam(lr=1e-5), loss=&quot;binary_crossentropy&quot;, metrics=[&#x27;accuracy&#x27;,f1_m,precision_m, recall_m])
+    
+    return model
+
+strategy = tf.distribute.get_strategy()
+with strategy.scope():
+    transformer_layer = (
+        transformers.TFBertModel
+        .from_pretrained(&#x27;bert-base-chinese&#x27; ,from_pt = True)
+    )
+    cls = build_model(transformer_layer, max_len=MAX_LEN)</code></pre><h3 id="ffe15a56-a3c6-4f7c-be57-03a92b64a37d" class="">2. 擷取人名</h3><p id="2945516c-9207-431d-89f4-7339e70c4d00" class="">這部份我嘗試了很多方法，想用同樣的模式以 transformers 在 BERT 上面再架一層 GRU，但中間各種 bug 解不了，剛好發現 <a target="_blank" rel="noopener" href="https://github.com/BrikerMan/Kashgari/"><strong>kashgari</strong></a>，它包含了一些 NLP 模型的框架，其中有實體辨識 (NER) 相關模型，發現訓練的效果還不錯（人名辨識的部份 f1-score 有 0.96），我就決定先拿來用。</p><pre id="30744e5f-f416-41f3-bd8c-7f6dfdcb4c0c" class="code"><code>from kashgari.tasks.labeling import BiGRU_Model
+model = BiGRU_Model(embed, sequence_length=SEQUENCE_LENGTH)
+          
+early_stop = keras.callbacks.EarlyStopping(patience=EARL_STOPPING_PATIENCE)
+reduse_lr_callback = keras.callbacks.ReduceLROnPlateau(factor=0.1, 
+                                                        patience=2)
+eval_callback = EvalCallBack(kash_model=model,
+                              x_data=valid_x, 
+                              y_data=valid_y,
+                              truncating=True,
+                              step=2)
+
+tf_board = keras.callbacks.TensorBoard(
+    log_dir=os.path.join(TF_LOG_FOLDER, run_name), 
+    update_freq=1000
+)
+
+callbacks = [early_stop, reduse_lr_callback, eval_callback, tf_board]
+
+model.build_model(train_x, train_y)
+model.compile_model(optimizer=Adam(lr=1e-5))
+model.fit(train_x, train_y, valid_x, valid_y,
+          callbacks=callbacks,
+          epochs=EPOCHS)</code></pre><h3 id="5266a2c3-8aa4-4659-854c-afdaf21d5141" class="">3. 擷取關鍵句子</h3><p id="33cd470f-d242-4c4e-a64c-27e2c0a9650c" class="">一開始我直接使用 <strong>snownlp </strong>進行 summarize 篩選出大約20句摘要句子，但到比賽後期發現這樣行不通，一篇文章通常有多個非關鍵人物的名字，例如上面提到過會混雜記者、該案件法官、檢察官等，需要另一個模型判斷哪些句子該納入。於是我就用暴力解法直接幫每個句子標註標籤，做出一個分類模型。其中，同時有人名與犯罪事實的就標註 1 ，例如：</p><blockquote id="bfd92f33-a68c-4245-a449-551b657139cd" class=""><em> 「高盟傑與同夥8月1日被台中地檢署查獲涉嫌販賣海洛因及安毒」</em></blockquote><p id="0b738c56-6138-489d-9bc3-815b529e4940" class="">然而，如果無關則標註為 0 ，例如：</p><blockquote id="f231ea0f-844e-42cb-8dfa-52df938f49a6" class=""><em>「記者陳俊宏／綜合報導台南市一名李姓女消防員被控有火警時」</em></blockquote><blockquote id="0940dfb4-686c-4ede-8bb7-4ff4bfe9ebfc" class=""><em>「前中華電信董事長、交大榮譽教授呂學錦，今年7月間接到冒充特偵組檢察官的詐騙集團來電」</em></blockquote><p id="123cb668-3be2-4b24-8e32-4e870b3e4f32" class="">含有不相關人名的我也一律標註為 0，例如：</p><blockquote id="415967ad-651d-48fc-af6a-eb1585dc8460" class=""><em>「陳廷智長女即副總陳鏡如1年」</em></blockquote><p id="042f00d1-afdf-426f-892d-e548ea4da0ad" class="">這樣可以盡量避免納入不相關人名，當然這樣只能刪掉一些明顯不要的句子，但加入句子分類模型後每日分數從 365,366 進步至371，但已經是比賽最後一天了。</p><h2 id="4cc209f0-30a3-4e05-af4e-b1a839ce5765" class="">After Competition</h2><p id="8b702b6c-9fa2-40e9-afbb-2e3330b08365" class="">一開始抱著學習的心態，加上只有一個人，所以第一天發現自己有30名時超開心，重新把第一步的分類模型重新訓練，加長tokenize的長度，準確率果然進步至0.99，分數也從350進步至365。在這場比賽我基本上就是靠 BERT 而已，自己貢獻的範圍其實很有限，但也見識到了目前自然語言處理的強大，這應該是往後學習 NLP 相關知識的一個起點。</p><hr id="4426480c-b894-4cbf-8b73-fbe3c3612112"/><figure id="f455be51-d504-4d71-8c07-3cb00683e058" class="image"><a href="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/rank.jpg"><img style="width:384px" src="%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD%207a03e0f02c7b4bba8475e865e88177f2/rank.jpg"/></a></figure><p id="6feda165-a1d1-4af7-b7dc-b166ccf56f99" class="block-color-gray">取得第13名的成績(13/409)</p><figure id="3b8e1764-3a5d-4bbb-aafb-a961f8e5855b"><a target="_blank" rel="noopener" href="https://github.com/halloju/ESUM-NLP-Competition" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">halloju/ESUM-NLP-Competition</div><div class="bookmark-description">Contribute to halloju/ESUM-NLP-Competition development by creating an account on GitHub.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/halloju/ESUM-NLP-Competition</div></div><img src="https://avatars1.githubusercontent.com/u/23446450?s=400&amp;v=4" class="bookmark-image"/></a></figure><p id="5f990388-ae8e-4b5f-af60-2a1151ac752e" class="">
+</p></div></article></body></html>
       
     </div>
 
