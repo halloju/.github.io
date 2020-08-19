@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-19 14:08:13" itemprop="dateModified" datetime="2020-08-19T14:08:13+08:00">2020-08-19</time>
+                <time title="Modified: 2020-08-19 14:09:18" itemprop="dateModified" datetime="2020-08-19T14:09:18+08:00">2020-08-19</time>
               </span>
 
           
@@ -286,7 +286,7 @@
 <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="addition">!判斷是否為AML相關的新聞 (Classification) → 擷取關鍵句子 (Summarize)→ 擷取人名 (Name entity recognition)</span></span><br></pre></td></tr></table></figure>
 <p>這個策略的重點在於擷取關鍵句子，如果文章中出現太多誤導性的句子就會多出很多無關的人，例如記者、檢察官、法官，「<em>創辦人<strong>陳廷智</strong>之子、總經理陳星佑被高等法院加重改判刑2年半</em>」，或是誰誰誰的兒女及兄弟姊妹等。</p>
 <p>另一個我想到比較好的作法是：</p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">判斷是否為AML相關的新聞 (Classification) → 擷取人名 (Name entity recognition)→ 指代消解(Coreference resolution) →句子分類，也就是那個人有罪無罪 (Classification)</span><br></pre></td></tr></table></figure>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="addition">!判斷是否為AML相關的新聞 (Classification) → 擷取人名 (Name entity recognition)→ 指代消解(Coreference resolution) →句子分類，也就是那個人有罪無罪 (Classification)</span></span><br></pre></td></tr></table></figure>
 <p>但這時候會出現一些我無法判斷規則的狀況，這裡舉一些例子，</p>
 <ol>
 <li>「<em>…另被檢方指控涉逃漏稅與偽證的農地買主<strong>林德復</strong>，也因罪嫌不足獲判無罪</em>」，這篇<strong>林德復</strong>不在名單內，但</li>
